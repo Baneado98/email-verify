@@ -1,0 +1,10 @@
+# Published package must INCLUDE dist/ (compiled JS the bin points to).
+# Exclude dev cruft and secrets only.
+.npmrc
+.env
+.vercel
+*.log
+.DS_Store
+.git
+node_modules
+email-verify-mcp-*.tgz

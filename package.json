@@ -1,0 +1,67 @@
+{
+  "name": "email-verify-mcp",
+  "version": "0.1.0",
+  "mcpName": "io.github.Baneado98/email-verify",
+  "description": "Live email verification (syntax, MX, disposable, role-based, catch-all and a live SMTP mailbox probe) as an MCP tool and a pay-per-call x402 endpoint. Returns VALID/RISKY/INVALID + a deliverability score — without sending any email. For AI agents and list cleaning.",
+  "type": "module",
+  "bin": {
+    "email-verify": "dist/mcp.js"
+  },
+  "main": "dist/mcp.js",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE",
+    "server.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baneado98/email-verify.git"
+  },
+  "homepage": "https://email-verify.vercel.app",
+  "bugs": {
+    "url": "https://github.com/Baneado98/email-verify/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc && node scripts/sync-landing.mjs",
+    "prepublishOnly": "npm run build",
+    "start:mcp": "node dist/mcp.js",
+    "start:http": "node dist/server.js",
+    "dev:mcp": "tsx src/mcp.ts",
+    "dev:http": "tsx src/server.ts",
+    "test:engine": "tsx src/engine.test.ts"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "email",
+    "email-verification",
+    "email-validation",
+    "disposable-email",
+    "smtp",
+    "mx",
+    "deliverability",
+    "catch-all",
+    "role-based",
+    "list-cleaning",
+    "x402",
+    "ai-agent"
+  ],
+  "author": "email-verify",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  },
+  "devDependencies": {
+    "express": "^4.21.2",
+    "x402-express": "^1.2.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
