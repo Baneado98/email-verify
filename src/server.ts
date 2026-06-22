@@ -94,6 +94,71 @@ app.get("/.well-known/x402-listing", (_req, res) =>
     free: { verify: "https://email-verify-seven.vercel.app/verify?email=jane@example.com" },
   }));
 
+// Alias of the manifest at the path x402 crawlers probe with GET.
+app.get("/.well-known/x402", (_req, res) =>
+  res.json({
+    x402Version: 1,
+    name: "email-verify",
+    description:
+      "Live email verification: syntax, MX, disposable/temp detection, role-based, catch-all and a live SMTP mailbox probe (RCPT-TO, no mail sent). VALID/RISKY/INVALID + deliverability score.",
+    endpoints: [
+      { method: "GET", path: "/pro/verify", price: { amount: "0.05", currency: "USD", asset: "USDC", network: "base" }, payTo: PAYTO, scheme: "exact" },
+      { method: "GET", path: "/pro/verify_many", price: { amount: "0.05", currency: "USD", asset: "USDC", network: "base" }, payTo: PAYTO, scheme: "exact" },
+    ],
+  }));
+
+// Standard x402 discovery doc read by @agentcash/discovery (x402scan, PipRail,
+// agent crawlers): OpenAPI 3.1 with x-payment-info per paid operation +
+// contact email for ownership. This is the real discovery lever.
+app.get("/openapi.json", (_req, res) => {
+  const base = "https://email-verify-seven.vercel.app";
+  const payInfo = {
+    price: { currency: "USD", mode: "fixed", amount: 0.05 },
+    protocols: [
+      { x402: { scheme: "exact", network: "base", asset: "USDC", payTo: PAYTO, maxAmountRequired: "50000" } },
+    ],
+  };
+  res.json({
+    openapi: "3.1.0",
+    info: {
+      title: "email-verify",
+      version: "0.1.0",
+      description:
+        "Live email verification (syntax, MX, disposable, role-based, catch-all, live SMTP mailbox probe). Pay-per-call via x402 (USDC on Base).",
+      contact: { email: "saraelkabir97@gmail.com" },
+    },
+    servers: [{ url: base }],
+    paths: {
+      "/pro/verify": {
+        get: {
+          summary: "Deep live verification of one email incl. SMTP mailbox probe (pay-per-call).",
+          operationId: "proVerify",
+          "x-payment-info": payInfo,
+          parameters: [{ name: "email", in: "query", required: true, schema: { type: "string" }, description: "Email to verify." }],
+          responses: { "200": { description: "Verification result (JSON)." }, "402": { description: "Payment required (x402)." } },
+        },
+      },
+      "/pro/verify_many": {
+        get: {
+          summary: "Deep verification of up to 50 emails in one call (pay-per-call).",
+          operationId: "proVerifyMany",
+          "x-payment-info": payInfo,
+          parameters: [{ name: "emails", in: "query", required: true, schema: { type: "string" }, description: "Comma-separated emails." }],
+          responses: { "200": { description: "Verification results (JSON)." }, "402": { description: "Payment required (x402)." } },
+        },
+      },
+      "/verify": {
+        get: {
+          summary: "Free metadata-level verification (rate-limited).",
+          operationId: "verify",
+          parameters: [{ name: "email", in: "query", required: true, schema: { type: "string" } }],
+          responses: { "200": { description: "Verification result (JSON)." } },
+        },
+      },
+    },
+  });
+});
+
 // ---- MCP-over-HTTP (free) ----------------------------------------------
 app.post("/mcp", async (req: Request, res: Response) => {
   try {
