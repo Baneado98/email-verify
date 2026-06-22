@@ -4,7 +4,7 @@
 
 `email-verify` is a live email-verification service shipped two ways:
 
-- an **MCP server** (`npx -y email-verify-mcp`) you plug into Claude, Cursor or any MCP agent, and
+- an **MCP server** (`npx -y mailbox-verify-mcp`) you plug into Claude, Cursor or any MCP agent, and
 - a **pay-per-call HTTP API** gated by [x402](https://x402.org) (USDC on Base) for autonomous agents — no sign-up, no API key.
 
 It returns a **VALID / RISKY / INVALID** verdict with a 0–100 deliverability score and explained reasons.
@@ -27,7 +27,7 @@ Everything is **read-only**. No email is ever sent.
 ```json
 {
   "mcpServers": {
-    "email-verify": { "command": "npx", "args": ["-y", "email-verify-mcp"] }
+    "email-verify": { "command": "npx", "args": ["-y", "mailbox-verify-mcp"] }
   }
 }
 ```

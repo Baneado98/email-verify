@@ -1,11 +1,11 @@
 {
-  "name": "email-verify-mcp",
+  "name": "mailbox-verify-mcp",
   "version": "0.1.0",
   "mcpName": "io.github.Baneado98/email-verify",
   "description": "Live email verification (syntax, MX, disposable, role-based, catch-all and a live SMTP mailbox probe) as an MCP tool and a pay-per-call x402 endpoint. Returns VALID/RISKY/INVALID + a deliverability score — without sending any email. For AI agents and list cleaning.",
   "type": "module",
   "bin": {
-    "email-verify": "dist/mcp.js"
+    "mailbox-verify": "dist/mcp.js"
   },
   "main": "dist/mcp.js",
   "files": [

@@ -7,4 +7,4 @@
 .DS_Store
 .git
 node_modules
-email-verify-mcp-*.tgz
+mailbox-verify-mcp-*.tgz

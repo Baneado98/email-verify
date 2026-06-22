@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// email-verify MCP server (stdio transport) — entrypoint for `npx email-verify-mcp`.
+// email-verify MCP server (stdio transport) — entrypoint for `npx mailbox-verify-mcp`.
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { buildMcpServer } from "./mcpServer.js";
 

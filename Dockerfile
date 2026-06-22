@@ -3,7 +3,7 @@
 # so there is NO in-container TypeScript build that can fail.
 FROM node:20-alpine
 WORKDIR /app
-RUN npm install --omit=dev --no-audit --no-fund email-verify-mcp@latest
+RUN npm install --omit=dev --no-audit --no-fund mailbox-verify-mcp@latest
 ENV NODE_ENV=production
 # Stdio MCP server. Glama runs this and sends initialize + tools/list.
-CMD ["npx", "--no-install", "email-verify-mcp"]
+CMD ["npx", "--no-install", "mailbox-verify-mcp"]
