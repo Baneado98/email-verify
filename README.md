@@ -42,10 +42,10 @@ Or connect over HTTP at `POST /mcp`.
 ## Free HTTP API
 
 ```
-GET https://email-verify.vercel.app/verify?email=jane@example.com
-GET https://email-verify.vercel.app/verify?email=foo@mailinator.com   # → RISKY (disposable)
-GET https://email-verify.vercel.app/verify?email=jane@gmial.com       # → RISKY (domain typo)
-GET https://email-verify.vercel.app/verify_many?emails=a@x.com,b@y.com
+GET https://email-verify-seven.vercel.app/verify?email=jane@example.com
+GET https://email-verify-seven.vercel.app/verify?email=foo@mailinator.com   # → RISKY (disposable)
+GET https://email-verify-seven.vercel.app/verify?email=jane@gmial.com       # → RISKY (domain typo)
+GET https://email-verify-seven.vercel.app/verify_many?emails=a@x.com,b@y.com
 ```
 
 Free tier is rate-limited (30 / hour / IP) and runs every check **except** the live SMTP probe.
