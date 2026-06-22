@@ -8,3 +8,6 @@ dist/
 .npmrc
 
 .vercel
+
+_post_reset.sh
+_*.mjs
